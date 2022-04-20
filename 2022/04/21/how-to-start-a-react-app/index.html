@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="学习不依赖任何脚手架搭建一个 react 项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始搭建一个 React APP">
+<meta property="og:url" content="http://example.com/2022/04/21/how-to-start-a-react-app/index.html">
+<meta property="og:site_name" content="Yuepeng.Li">
+<meta property="og:description" content="学习不依赖任何脚手架搭建一个 react 项目">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-04-20T19:26:15.000Z">
+<meta property="article:modified_time" content="2022-04-20T19:45:05.149Z">
+<meta property="article:author" content="liyuepeng.lester">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/04/21/how-to-start-a-react-app/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>从零开始搭建一个 React APP | Yuepeng.Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Yuepeng.Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/21/how-to-start-a-react-app/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="liyuepeng.lester">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yuepeng.Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从零开始搭建一个 React APP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-21 03:26:15 / Modified: 03:45:05" itemprop="dateCreated datePublished" datetime="2022-04-21T03:26:15+08:00">2022-04-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>学习不依赖任何脚手架搭建一个 react 项目</p>
+<span id="more"></span>
+
+<blockquote>
+<p>Notice: Use yarn as package manage, node version v12.22.0.</p>
+</blockquote>
+<h2 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h2><h3 id="Step-One-Create-project-folder"><a href="#Step-One-Create-project-folder" class="headerlink" title="Step One: Create project-folder"></a>Step One: Create project-folder</h3><ol>
+<li>Create Folder</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> project-name</span><br><span class="line"><span class="built_in">cd</span> project-name</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Init npm</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn init</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Init git</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Create git ignore file</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> .gitignore</span><br></pre></td></tr></table></figure>
+
+<p>And enter those line</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## ide relative</span></span><br><span class="line">/.idea</span><br><span class="line"></span><br><span class="line"><span class="comment">## dependencies</span></span><br><span class="line">/node_modules</span><br><span class="line"></span><br><span class="line"><span class="comment">## log file</span></span><br><span class="line">yarn-error.log</span><br><span class="line"></span><br><span class="line"><span class="comment">## dist</span></span><br><span class="line">/dist</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-Two-Initial-project-construction"><a href="#Step-Two-Initial-project-construction" class="headerlink" title="Step Two: Initial project construction"></a>Step Two: Initial project construction</h3><ol>
+<li>Create config folder</li>
+<li>Create src folder</li>
+<li>Create public folder</li>
+</ol>
+<h3 id="Step-Three-Install-dependencies"><a href="#Step-Three-Install-dependencies" class="headerlink" title="Step Three: Install dependencies"></a>Step Three: Install dependencies</h3><p>You will need <code>webpack</code>, <code>webpack-cli</code>, <code>webpack-dev-server</code> as your devDependencies.</p>
+<p>And you also need <code>react</code>, <code>react-dom</code> as you dependencies.</p>
+<p>Use command below to add dependencies.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add webpack webpack-cli webpack-dev-server --dev </span><br><span class="line">yarn add react react-dom</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step-Four-Write-entry-file"><a href="#Step-Four-Write-entry-file" class="headerlink" title="Step Four: Write entry file"></a>Step Four: Write entry file</h4><p>Create an index.jsx in src folder</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span>/&gt;</span></span>, <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>Create an index.css in src folder</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-Five-Write-entry-html"><a href="#Step-Five-Write-entry-html" class="headerlink" title="Step Five: Write entry html"></a>Step Five: Write entry html</h3><p>Create an index.html in public folder</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Break-Why-is-the-project-so-complex"><a href="#Break-Why-is-the-project-so-complex" class="headerlink" title="Break: Why is the project so complex"></a>Break: Why is the project so complex</h3><p>Actually, in this position, you may think I can run this app, but there are too many questions for browsers to run the project.</p>
+<ul>
+<li>HTML doesn’t involve javascript file.</li>
+<li>Browser doesn’t recognize jsx extension.</li>
+<li>JSX syntax isn’t supported in any browser.</li>
+<li>ES6 syntax isn’t supported in all browsers.</li>
+</ul>
+<p>So, we need to use webpack to build the project.</p>
+<h3 id="Step-Six-Write-your-config"><a href="#Step-Six-Write-your-config" class="headerlink" title="Step Six: Write your config"></a>Step Six: Write your config</h3><p>In config folder, you may create a file named webpack.config.js</p>
+<p>Before that, you need to install so many dependencies<br><code>html-webpack-plugin</code>, <code>babel-loader</code>, <code>css-loader</code>, <code>style-loader</code>, <code>url-loader</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add html-webpack-plugin babel-loader css-loader style-loader url-loader --dev</span><br></pre></td></tr></table></figure>
+
+<p>And then, copy those in, I already wrote comments in this file.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HTMLWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> isDev = process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;development&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// Switch mode depend on process env</span></span><br><span class="line">  <span class="attr">mode</span>: isDev ? <span class="string">&#x27;development&#x27;</span> : <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">  <span class="comment">// enable source-map generation</span></span><br><span class="line">  <span class="attr">devtool</span>: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">  <span class="comment">// specific entry to src/index.jsx</span></span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;src&#x27;</span>, <span class="string">&#x27;index.jsx&#x27;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// specific build result to dist folder, as [entry-key].js </span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">    <span class="attr">libraryTarget</span>: <span class="string">&quot;umd&quot;</span>,</span><br><span class="line">    <span class="attr">globalObject</span>: <span class="string">&#x27;typeof self !== \&#x27;undefined\&#x27; ? self : this&#x27;</span>,</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].js&#x27;</span>,</span><br><span class="line">    <span class="attr">publicPath</span>: <span class="string">&quot;/&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// declare which kind of file will load by which loader</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// jsx and js file will be loaded by babel-loader</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.jsx?$/</span>,</span><br><span class="line">        <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        <span class="attr">use</span>: [&#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// css file will be loaded by css-loader &amp; style-loader</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.css$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [&#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&quot;style-loader&quot;</span></span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// jpeg, png, gif, svg will be loaded by url loader</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(jpeg|jpg|png|gif|svg)$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [&#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;url-loader&#x27;</span></span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// use public/index.html as template, generate dist/index.html</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HTMLWebpackPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">template</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="comment">// auto resolve file extension</span></span><br><span class="line">    <span class="attr">extensions</span>: [<span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// specific dev server will open on both localhost and ip:port</span></span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;0.0.0.0&#x27;</span>,</span><br><span class="line">    <span class="attr">hot</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">historyApiFallback</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">client</span>: &#123;</span><br><span class="line">      <span class="attr">overlay</span>: &#123;<span class="attr">errors</span>: <span class="literal">true</span>, <span class="attr">warnings</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Is that easy to understand this config file? You need one more step to start local dev.</p>
+<p>Install those babel dependencies <code>@babel/core</code>, <code>@babel/preset-env</code>, <code>@babel/preset-react</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @babel/core @babel/preset-env @babel/preset-react --dev</span><br></pre></td></tr></table></figure>
+
+<p>Create <code>babel.config.js</code> in root folder, and then copy those in</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="string">&quot;presets&quot;</span>: [</span><br><span class="line">    <span class="comment">// parse es6 syntax</span></span><br><span class="line">    [</span><br><span class="line">      <span class="string">&quot;@babel/preset-env&quot;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&quot;targets&quot;</span>: &#123;</span><br><span class="line">          <span class="string">&quot;chrome&quot;</span>: <span class="string">&quot;58&quot;</span>,</span><br><span class="line">          <span class="string">&quot;ie&quot;</span>: <span class="string">&quot;9&quot;</span>,</span><br><span class="line">          <span class="string">&quot;android&quot;</span>: <span class="string">&quot;4.4&quot;</span>,</span><br><span class="line">          <span class="string">&quot;ios&quot;</span>: <span class="string">&quot;9&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="comment">// parse jsx syntax</span></span><br><span class="line">    <span class="string">&quot;@babel/preset-react&quot;</span></span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>This file will config how babel-loader handle .js and .jsx file</p>
+<h3 id="Finally-development-Start-your-server"><a href="#Finally-development-Start-your-server" class="headerlink" title="Finally development: Start your server"></a>Finally development: Start your server</h3><p>Actually, you can run </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack-dev-server --config ./config/webpack.config.js</span><br></pre></td></tr></table></figure>
+
+<p>Then you will see command line show IP:port, click it or directly open <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a>. You will see a blue hello world</p>
+<p>You can also create a dev script for your project, is not required, but it’s usefull.</p>
+<p>Create a script key in package.json, like this</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  ...others<span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack-dev-server --config ./config/webpack.config.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  ...others</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Then you can run yarn dev to start local develop server.<br>Enjoy :)</p>
+<h3 id="Finally-deployment-Build-your-project"><a href="#Finally-deployment-Build-your-project" class="headerlink" title="Finally deployment: Build your project"></a>Finally deployment: Build your project</h3><p>Actually, you can run </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx webpack --config ./config/webpack.config.js</span><br></pre></td></tr></table></figure>
+
+<p>Same, you can create a build script for your project too.<br>Create a script key in package.json, like this</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  ...others<span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config ./config/webpack.config.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  ...others</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>Then you can run yarn build to build a production result, the output will show in dist folder.</p>
+<p>If you want to test build result, you can use serve command, need install serve in you computer</p>
+<p>Then use serve dist, it will start a static server on your computer, you can open <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a> to see build result.</p>
+<p>Enjoy</p>
+<h2 id="Optimize"><a href="#Optimize" class="headerlink" title="Optimize"></a>Optimize</h2><h3 id="Optimize-1-Enable-Typescript"><a href="#Optimize-1-Enable-Typescript" class="headerlink" title="Optimize 1: Enable Typescript"></a>Optimize 1: Enable Typescript</h3><ol>
+<li>Install typescript</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add typescript ts-loader --dev</span><br><span class="line"><span class="comment">## this command is require too, react and react-dom doesn&#x27;t default include type declartion</span></span><br><span class="line">yarn add @types/react @types/react-dom --dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create tsconfig file</li>
+</ol>
+<p>tsconfig.json is used to declare how typescript handle ts(x?) file.</p>
+<p>Create tsconfig.json in root folder</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;lib&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;es2015&quot;</span><span class="punctuation">,</span> <span class="string">&quot;dom&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;es5&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;esnext&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;allowJs&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;checkJs&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;esModuleInterop&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;jsx&quot;</span><span class="punctuation">:</span> <span class="string">&quot;react&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;allowSyntheticDefaultImports&quot;</span><span class="punctuation">:</span> <span class="keyword">true</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./src/*&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./node_modules/*&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Create a typescript entry</li>
+</ol>
+<p>Create or change the previous file to src&#x2F;index.tsx</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Props</span> &#123;</span><br><span class="line">  <span class="attr">text</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">App</span>: <span class="title class_">React</span>.<span class="property">FC</span>&lt;<span class="title class_">Props</span>&gt; = <span class="function">(<span class="params">&#123; text &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;text&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> <span class="attr">text</span>=<span class="string">&quot;hello world&quot;</span>/&gt;</span></span>, <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Change webpack config</li>
+</ol>
+<p>Previous config file didn’t declare how to handle typescript file(.tsx, .ts), we need add one more loader to handle those.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// specific entry to src/index.tsx</span></span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;src&#x27;</span>, <span class="string">&#x27;index.tsx&#x27;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// declare which kind of file will load by which loader</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// tsx and ts file will be loaded by ts-loader then babel-loader</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.tsx?$/</span>,</span><br><span class="line">        <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,</span><br><span class="line">        <span class="attr">use</span>: [&#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          <span class="attr">loader</span>:<span class="string">&quot;ts-loader&quot;</span></span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="comment">// auto resolve file extension</span></span><br><span class="line">    <span class="attr">extensions</span>: [<span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&#x27;.ts&#x27;</span>, <span class="string">&#x27;.tsx&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...don\&#x27;t change</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Optimize-2-Enable-Eslint"><a href="#Optimize-2-Enable-Eslint" class="headerlink" title="Optimize 2: Enable Eslint"></a>Optimize 2: Enable Eslint</h3><p>We will add eslint to our project, we will start with typescript.</p>
+<ol>
+<li>Install dependencies</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add eslint eslint-webpack-plugin --dev</span><br><span class="line"><span class="comment"># load parser and plugins for typescript</span></span><br><span class="line">yarn add @typescript-eslint/eslint-plugin eslint-plugin-react @typescript-eslint/parser --dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create config file</li>
+</ol>
+<p>Create .eslintrc.js file in the root folder</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="string">&quot;extends&quot;</span>: [</span><br><span class="line">    <span class="string">&quot;plugin:react/recommended&quot;</span>,</span><br><span class="line">    <span class="string">&quot;plugin:@typescript-eslint/recommended&quot;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">plugins</span>: [<span class="string">&#x27;@typescript-eslint&#x27;</span>],</span><br><span class="line">  <span class="attr">parser</span>: <span class="string">&#x27;@typescript-eslint/parser&#x27;</span>,</span><br><span class="line">  <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">    <span class="comment">// 支持最新 JavaScript</span></span><br><span class="line">    <span class="attr">ecmaVersion</span>: <span class="number">2018</span>,</span><br><span class="line">    <span class="attr">sourceType</span>: <span class="string">&#x27;module&#x27;</span>,</span><br><span class="line">    <span class="attr">ecmaFeatures</span>: &#123;</span><br><span class="line">      <span class="attr">jsx</span>: <span class="literal">true</span> <span class="comment">// Allows for the parsing of JSX</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">env</span>: &#123;</span><br><span class="line">    <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">rules</span>: &#123;</span><br><span class="line">    <span class="string">&quot;semi&quot;</span>: <span class="string">&quot;error&quot;</span>, <span class="comment">// test feature</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">ignorePatterns</span>: [</span><br><span class="line">    <span class="string">&quot;config&quot;</span>,</span><br><span class="line">    <span class="string">&quot;public&quot;</span>,</span><br><span class="line">  ],</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Try out</li>
+</ol>
+<p>You can open src&#x2F;index.tsx, remove semi after each line, you will see your ide give wrong message.</p>
+<ol start="4">
+<li>Add it to build flow</li>
+</ol>
+<p>You may notice that we install eslint-loader, so let use put eslint stage in the build flow.</p>
+<p>In config&#x2F;webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">ESLintPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;eslint-webpack-plugin&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// use public/index.html as template, generate dist/index.html</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HTMLWebpackPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">template</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;public&#x27;</span>, <span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ESLintPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>,<span class="string">&#x27;.ts&#x27;</span>,<span class="string">&#x27;.tsx&#x27;</span>,<span class="string">&#x27;.jsx&#x27;</span>],</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">  <span class="comment">// ...don\&#x27;t change</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Then, run yarn dev, you will see build failed message due to missing semicolon</p>
+<p>You can add <code>fix: true</code> to ESLintPlugin options like this, then restart you dev server(ctrl + c to stop, yarn dev to run), then you will see the file has been auto fixed, and server auto start.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">ESLintPlugin</span>(&#123;</span><br><span class="line">  <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>,<span class="string">&#x27;.ts&#x27;</span>,<span class="string">&#x27;.tsx&#x27;</span>,<span class="string">&#x27;.jsx&#x27;</span>],</span><br><span class="line">  <span class="attr">fix</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Why we need add eslint to build flow?</p>
+<p>Normally, we do not develop a project by ourselves, other people may change some code in your project, they can choose ignore editor warning. So add it to build flow is good for project clean.</p>
+</blockquote>
+<h3 id="Optimize-3-Enable-Less"><a href="#Optimize-3-Enable-Less" class="headerlink" title="Optimize 3: Enable Less"></a>Optimize 3: Enable Less</h3><p>Sometimes you may want to use less&#x2F;scss to write your stylesheet. We need do something to enable that.</p>
+<ol>
+<li>Install dependencies</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add less less-loader --dev</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Create a less file</li>
+</ol>
+<p>Create or change the previous file to src&#x2F;index.less</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@color:</span> red;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="variable">@color</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Remember change reference in src&#x2F;index.tsx.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.less&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Change webpack config</li>
+</ol>
+<p>Previous config file didn’t declare how to handle less file(.less), we need add one more loader to handle those. Notice, we only need to change the previous CSS pattern.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">// less, css file will be loaded by css-loader &amp; style-loader</span></span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(le|c)ss$/</span>,</span><br><span class="line">        <span class="attr">use</span>: [&#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&quot;style-loader&quot;</span></span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">        &#125;, &#123;</span><br><span class="line">          <span class="attr">loader</span>: <span class="string">&#x27;less-loader&#x27;</span>,</span><br><span class="line">        &#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>Try out</li>
+</ol>
+<p>Run yarn dev to try less file result</p>
+<h3 id="Optimize-4-Use-Alias"><a href="#Optimize-4-Use-Alias" class="headerlink" title="Optimize 4: Use Alias"></a>Optimize 4: Use Alias</h3><p>Once your project gets bigger, there will be so many folders, reference file will show so many ‘..&#x2F;..&#x2F;..&#x2F;‘</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xxx <span class="keyword">from</span> <span class="string">&#x27;../../../utils/test&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>It is not good for understanding.</p>
+<p>So, alias can help you simplize the reference code.<br>Before all, we need to create another file for test.</p>
+<p>Create src&#x2F;utils&#x2F;add.ts</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">add</span> = (<span class="params">a: <span class="built_in">number</span>, b: <span class="built_in">number</span></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>If we want to use this add function, we will use like this in src&#x2F;index.tsx</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;add&#125; <span class="keyword">from</span> <span class="string">&#x27;./utils/add&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./index.less&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Props</span> &#123;</span><br><span class="line">  <span class="attr">text</span>: <span class="built_in">string</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">App</span>: <span class="title class_">React</span>.<span class="property">FC</span>&lt;<span class="title class_">Props</span>&gt; = <span class="function">(<span class="params">&#123; text &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;text&#125; &#123;add(1, 2)&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">App</span> <span class="attr">text</span>=<span class="string">&#x27;hello typescript&#x27;</span> /&gt;</span></span>, <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;root&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Add Webpack config</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="comment">// src folder can be use with @/</span></span><br><span class="line">    <span class="attr">alias</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;@&#x27;</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, <span class="string">&#x27;src&#x27;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// auto resolve file extension</span></span><br><span class="line">    <span class="attr">extensions</span>: [<span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.jsx&quot;</span>, <span class="string">&#x27;.ts&#x27;</span>, <span class="string">&#x27;.tsx&#x27;</span>]</span><br><span class="line">  &#125;,</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>Add Typescript config</li>
+</ol>
+<p>If you are using typescript, you need one more step.<br>In tsconfig.json, add </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;baseUrl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./src/&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;paths&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;@/*&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;./*&quot;</span><span class="punctuation">]</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>Try out.</li>
+</ol>
+<p>Change src&#x2F;index.tsx to</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;add&#125; <span class="keyword">from</span> <span class="string">&#x27;@/utils/add&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Run yarn dev to see result.</p>
+<h2 id="Project"><a href="#Project" class="headerlink" title="Project"></a>Project</h2><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;min-react&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack-dev-server --config ./config/webpack.config.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config ./config/webpack.config.js&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;react&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^18.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;react-dom&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^18.0.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@babel/core&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^7.17.9&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@babel/preset-env&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^7.16.11&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@babel/preset-react&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^7.16.7&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@types/react&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^18.0.5&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@types/react-dom&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^18.0.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@typescript-eslint/eslint-plugin&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.19.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@typescript-eslint/parser&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.19.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;babel-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^8.2.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;css-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^6.7.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;eslint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^8.13.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;eslint-plugin-react&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^7.29.4&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;eslint-webpack-plugin&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.1.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;html-webpack-plugin&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.5.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;less&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.1.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;less-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^10.2.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;style-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^3.3.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;ts-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^9.2.8&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;typescript&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.6.3&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;url-loader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.1.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;webpack&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^5.72.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;webpack-cli&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.9.2&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;webpack-dev-server&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^4.8.1&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Codebase"><a href="#Codebase" class="headerlink" title="Codebase"></a>Codebase</h3><p><a target="_blank" rel="noopener" href="https://code.byted.org/liyuepeng.lester/template-mini-react">https://code.byted.org/liyuepeng.lester/template-mini-react</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Steps"><span class="nav-number">1.</span> <span class="nav-text">Steps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-One-Create-project-folder"><span class="nav-number">1.1.</span> <span class="nav-text">Step One: Create project-folder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-Two-Initial-project-construction"><span class="nav-number">1.2.</span> <span class="nav-text">Step Two: Initial project construction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-Three-Install-dependencies"><span class="nav-number">1.3.</span> <span class="nav-text">Step Three: Install dependencies</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-Four-Write-entry-file"><span class="nav-number">1.3.1.</span> <span class="nav-text">Step Four: Write entry file</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-Five-Write-entry-html"><span class="nav-number">1.4.</span> <span class="nav-text">Step Five: Write entry html</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Break-Why-is-the-project-so-complex"><span class="nav-number">1.5.</span> <span class="nav-text">Break: Why is the project so complex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step-Six-Write-your-config"><span class="nav-number">1.6.</span> <span class="nav-text">Step Six: Write your config</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finally-development-Start-your-server"><span class="nav-number">1.7.</span> <span class="nav-text">Finally development: Start your server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finally-deployment-Build-your-project"><span class="nav-number">1.8.</span> <span class="nav-text">Finally deployment: Build your project</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Optimize"><span class="nav-number">2.</span> <span class="nav-text">Optimize</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-1-Enable-Typescript"><span class="nav-number">2.1.</span> <span class="nav-text">Optimize 1: Enable Typescript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-2-Enable-Eslint"><span class="nav-number">2.2.</span> <span class="nav-text">Optimize 2: Enable Eslint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-3-Enable-Less"><span class="nav-number">2.3.</span> <span class="nav-text">Optimize 3: Enable Less</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimize-4-Use-Alias"><span class="nav-number">2.4.</span> <span class="nav-text">Optimize 4: Use Alias</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Project"><span class="nav-number">3.</span> <span class="nav-text">Project</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#package-json"><span class="nav-number">3.1.</span> <span class="nav-text">package.json</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Codebase"><span class="nav-number">3.2.</span> <span class="nav-text">Codebase</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">liyuepeng.lester</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liyuepeng.lester</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
